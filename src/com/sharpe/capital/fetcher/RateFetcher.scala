@@ -1,4 +1,4 @@
-package com.sharpe.capital
+package com.sharpe.capital.fetcher
 
 import scalaj.http.Http
 import scalaj.http.HttpResponse
