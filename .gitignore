@@ -1,0 +1,7 @@
+resources/application.properties
+target
+.cache-main
+.cache-tests
+.classpath
+.project
+.settings
