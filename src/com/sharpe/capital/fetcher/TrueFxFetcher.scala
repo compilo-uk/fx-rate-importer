@@ -16,10 +16,12 @@ class TrueFxFetcher() extends RateFetcher {
   private val conf: Config = ConfigFactory.load()
 
   private val TrueFxBaseUrl: String = "https://webrates.truefx.com/rates/connect.html"
+  private val TrueFxUsername: String = conf.getString("true.fx.username")
+  private val TrueFxPassword: String = conf.getString("true.fx.password")
 
-  def getBySymbol(symbol: String): FxRate = {
+  override def getBySymbol(symbol: String): FxRate = {
 
-    val sessionId: String = Http(TrueFxBaseUrl).param("u", conf.getString("true.fx.username")).param("p", conf.getString("true.fx.password")).param("q", "eurates").asString.body.trim();
+    val sessionId: String = Http(TrueFxBaseUrl).param("u", TrueFxUsername).param("p", TrueFxPassword).param("q", "eurates").asString.body.trim();
 
     val ratesResponse: HttpResponse[String] = Http(TrueFxBaseUrl).param("id", sessionId).param("f", "csv").param("c", symbol).asString
 
