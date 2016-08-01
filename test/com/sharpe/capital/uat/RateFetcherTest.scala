@@ -6,6 +6,7 @@ import org.scalatest.GivenWhenThen
 import com.sharpe.capital.fetcher.RateFetcher
 import com.typesafe.config.ConfigFactory
 import com.typesafe.config.Config
+import com.sharpe.capital.model.FxRate
 
 class RateFetcherTest extends FeatureSpec with GivenWhenThen {
 
@@ -18,10 +19,12 @@ class RateFetcherTest extends FeatureSpec with GivenWhenThen {
 
   feature("Consumer requests FX rate by ticker symbol") {
     scenario("User requests FX rate with valid ticker symbol") {
-      assert(fetcher.getBySymbol("AUD/USD") == 1.0)
+      var rate: FxRate = fetcher.getBySymbol("AUD/USD")
+      assert(rate.ask() == 1.0)
     }
     scenario("User requests FX rate with invalid ticker symbol") {
-      assert(fetcher.getBySymbol("AUDUSD") == 1.0)
+      var rate: FxRate = fetcher.getBySymbol("AUD/USD")
+      assert(rate.ask() == 1.0)
     }
   }
 
