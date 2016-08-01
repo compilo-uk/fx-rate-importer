@@ -5,18 +5,19 @@ import scalaj.http.HttpResponse
 
 class RateFetcher(username: String, password: String) {
 
-  private var TrueFxBaseUrl: String = "https://webrates.truefx.com/rates/connect.html"
-  private var SessionToken: String = ""
+  private val TrueFxBaseUrl: String = "https://webrates.truefx.com/rates/connect.html"
+
+  private var sessionToken: String = _
 
   connect();
 
   def connect() {
     val tokenResponse: HttpResponse[String] = Http(TrueFxBaseUrl).param("u", username).param("p", password).param("q", "eurates").asString
-    this.SessionToken = tokenResponse.body.trim();
+    this.sessionToken = tokenResponse.body.trim();
   }
 
   def getBySymbol(symbol: String): Double = {
-    val ratesResponse: HttpResponse[String] = Http(TrueFxBaseUrl).param("id", this.SessionToken).param("f", "csv").param("c", symbol).asString
+    val ratesResponse: HttpResponse[String] = Http(TrueFxBaseUrl).param("id", this.sessionToken).param("f", "csv").param("c", symbol).asString
     println(ratesResponse.body.trim());
     return 1.0;
   }
