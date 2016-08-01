@@ -1,17 +1,26 @@
 package com.sharpe.capital.model
 
-class FxRate(a: BigDecimal, b: BigDecimal, s: String) {
+import java.util.Date
+
+/**
+ * Model class to wrap FX quote information
+ */
+class FxRate(askPrice: BigDecimal, bidPrice: BigDecimal, tickerSymbol: String, quoteDate: Date) {
 
   def bid(): BigDecimal = {
-    return b
+    return bidPrice
   }
 
   def ask(): BigDecimal = {
-    return a
+    return askPrice
   }
 
   def symbol(): String = {
-    return s
+    return tickerSymbol
+  }
+
+  def date(): Date = {
+    return quoteDate
   }
 
 }
