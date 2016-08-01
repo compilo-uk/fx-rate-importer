@@ -7,12 +7,13 @@ import com.sharpe.capital.fetcher.RateFetcher
 import com.typesafe.config.ConfigFactory
 import com.typesafe.config.Config
 import com.sharpe.capital.model.FxRate
+import com.sharpe.capital.fetcher.TrueFxFetcher
 
-class RateFetcherTest extends FeatureSpec with GivenWhenThen {
+class TrueFxFetcherTest extends FeatureSpec with GivenWhenThen {
 
-  private val fetcher: RateFetcher = new RateFetcher()
+  private val fetcher: RateFetcher = new TrueFxFetcher()
 
-  info("As a consumer of the FX Rate Importer")
+  info("As a consumer of the True FX Fetcher")
   info("I want to retrieve the current FX rate by ticker symbol")
   info("So that I can use the value within my application")
 
