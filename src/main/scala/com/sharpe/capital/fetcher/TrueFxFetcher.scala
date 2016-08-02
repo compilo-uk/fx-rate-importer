@@ -19,15 +19,26 @@ class TrueFxFetcher() extends RateFetcher {
   private val TrueFxUsername: String = conf.getString("true.fx.username")
   private val TrueFxPassword: String = conf.getString("true.fx.password")
 
+  private def buildFxRate(trueFxRow: String): FxRate = {
+
+    val sections = trueFxRow.split(",")
+
+    val symbol = sections(0)
+    val date = new Date(sections(1).toLong / 1000)
+    val bid = BigDecimal.exact(sections(2) + sections(3))
+    val ask = BigDecimal.exact(sections(4) + sections(5))
+
+    return new FxRate(ask, bid, symbol, date)
+
+  }
+
   override def getRateBySymbol(symbol: String): FxRate = {
 
     val sessionId: String = Http(TrueFxBaseUrl).param("u", TrueFxUsername).param("p", TrueFxPassword).param("q", "eurates").asString.body.trim();
 
     val ratesResponse: HttpResponse[String] = Http(TrueFxBaseUrl).param("id", sessionId).param("f", "csv").param("c", symbol).asString
 
-    println(ratesResponse.body.trim());
-
-    return new FxRate(1.0, 1.0, "AUD/USD", new Date);
+    return this.buildFxRate(ratesResponse.body.trim());
 
   }
 
