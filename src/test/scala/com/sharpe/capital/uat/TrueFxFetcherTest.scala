@@ -78,7 +78,7 @@ class TrueFxFetcherTest extends FeatureSpec with GivenWhenThen {
 
     scenario("User requests 2 valid ticker symbols, and one invalid symbol") {
 
-      Given("3 valid symbols")
+      Given("1 invalid symbol, and 2 valid symbols")
       var symbols = Array[String]("AUD/XXX", "GBP/USD", "EUR/USD")
 
       When("the FX rates are fetched")
