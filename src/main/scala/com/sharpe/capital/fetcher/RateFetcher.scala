@@ -18,4 +18,9 @@ trait RateFetcher {
    */
   def getRatesBySymbols(symbol: Array[String]): Buffer[FxRate]
 
+  /**
+   * Returns the FX rate for a given CSV row in String format
+   */
+  def buildFxRate(fxRow: String): FxRate
+
 }

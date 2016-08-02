@@ -28,7 +28,7 @@ class TrueFxFetcher() extends RateFetcher {
   private val TrueFxUsername: String = conf.getString("true.fx.username")
   private val TrueFxPassword: String = conf.getString("true.fx.password")
 
-  private def buildFxRate(trueFxRow: String): FxRate = {
+  override def buildFxRate(trueFxRow: String): FxRate = {
 
     val sections = trueFxRow.split(",")
 
