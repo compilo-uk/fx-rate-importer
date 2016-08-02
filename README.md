@@ -24,7 +24,7 @@ Add this dependency to your `pom.xml` file like so:
 
 ```xml
 <dependency>
-	<groupId>fx-rate-importer</groupId>
+	<groupId>com.sharpe.capital</groupId>
 	<artifactId>fx-rate-importer</artifactId>
 	<version>0.0.1</version>
 </dependency>
