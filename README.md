@@ -9,9 +9,7 @@ The rates are retrieved from the [True FX API](http://www.truefx.com/), which of
 
 The library is available in the following Nexus repository:
 
-```
 [http://nexus.sharpecapital.co.uk:8081](http://nexus.sharpecapital.co.uk:8081/)
-```
 
 Add this repository to your `pom.xml` file like so:
 
