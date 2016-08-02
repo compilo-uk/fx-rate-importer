@@ -1,4 +1,4 @@
-resources/application.properties
+src/main/resources/application.properties
 target
 .cache-main
 .cache-tests
