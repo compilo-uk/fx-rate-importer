@@ -12,6 +12,9 @@ import java.util.concurrent.CountDownLatch
 import java.util.ArrayList
 import scala.collection.mutable.LinkedList
 import com.sharpe.capital.model.FxRate
+import scala.collection.mutable.MutableList
+import scala.collection.mutable.Buffer
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * FX Rate Fetcher class. Abstracts out connectivity to True FX API and
@@ -48,24 +51,31 @@ class TrueFxFetcher() extends RateFetcher {
 
     println(ratesRow)
 
-    return this.buildFxRate(ratesRow);
+    if (ratesRow != null && !ratesRow.isEmpty()) {
+      return this.buildFxRate(ratesRow);
+    }
+
+    return null;
 
   }
 
-  override def getRatesBySymbols(symbols: Array[String]): Array[FxRate] = {
+  override def getRatesBySymbols(symbols: Array[String]): Buffer[FxRate] = {
 
     val latch = new CountDownLatch(symbols.size)
-    val rates = new Array[FxRate](symbols.size)
+    val rates: ArrayBuffer[FxRate] = new ArrayBuffer[FxRate]()
 
-    for (i <- 0 to (symbols.length - 1)) {
+    for (symbol <- symbols) {
 
       val task = Future[FxRate] {
-        getRateBySymbol(symbols(i))
+        getRateBySymbol(symbol)
       }
 
       task.onComplete { result =>
         {
-          rates(i) = result.get
+          val rate = result.get
+          if (rate != null) {
+            rates.append(rate)
+          }
           latch.countDown()
         }
       }
