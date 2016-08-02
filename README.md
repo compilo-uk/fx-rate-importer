@@ -32,27 +32,33 @@ This library can be used to simply retrieve FX rates from the [True FX API](http
 #### 1. Fetch Single FX Rate
 
 ```scala
+import com.sharpe.capital.model.FxRate
+import com.sharpe.capital.fetcher.RateFetcher
+import com.sharpe.capital.fetcher.TrueFxFetcher
+
+...
+
 val fetcher: RateFetcher = new TrueFxFetcher()
 
 var symbol = "AUD/USD"
 
 var rate: FxRate = fetcher.getRateBySymbol(symbol)
-
-println(rate.ask())
 ```
 
 #### 2. Fetch Many FX Rates
 
 ```scala
+import com.sharpe.capital.model.FxRate
+import com.sharpe.capital.fetcher.RateFetcher
+import com.sharpe.capital.fetcher.TrueFxFetcher
+
+...
+
 val fetcher: RateFetcher = new TrueFxFetcher()
 
 var symbols = Array[String]("AUD/USD", "GBP/USD", "EUR/USD")
 
 var rates: Buffer[FxRate] = fetcher.getRatesBySymbols(symbols)
-
-for (rate <- rates) {
-  println(rate.ask())
-}
 ```
 
 #### 3. Persist Single FX Rate
@@ -69,13 +75,13 @@ TBC
 
 ## Contributing
 
-##### Unit tests
+#### Unit tests
 Acceptance tests are written in [ScalaTest](http://www.scalatest.org/). Please add acceptance tests for every new feature or bug fix. `mvn install` to run the test suite.  
 
-##### Documentation
+#### Documentation
 Add documentation for every change. Feel free to send corrections or better docs! 
 
-##### Pull Requests
+#### Pull Requests
 Send _fixes_ PR on the `master` branch.
 
 ## License
