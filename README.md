@@ -5,7 +5,7 @@ The importer is implemented using Scala's Fututre class to important the rates a
 
 The rates are retrieved from the [True FX API](http://www.truefx.com/), which offers free real-time FX quotes for major currency pairs.
 
-## Distribution Management
+## Distribution / Dependency Management
 
 The library is available in the following Nexus repository:
 
@@ -19,11 +19,17 @@ Add this repository to your `pom.xml` file like so:
 TBC
 ```
 
+Add this dependency to your `pom.xml` file like so:
+
+```
+TBC
+```
+
 ## Usage / Examples
 
-This library can be used to simply retrieve FX rates from the True FX API, or to persist them to an underlying Cassandra data store.
+This library can be used to simply retrieve FX rates from the [True FX API](http://www.truefx.com/), or to persist them to an underlying Cassandra data store.
 
-#### 1. Get Single FX Rate
+#### 1. Fetch Single FX Rate
 
 ```scala
 val fetcher: RateFetcher = new TrueFxFetcher()
@@ -35,7 +41,7 @@ var rate: FxRate = fetcher.getRateBySymbol(symbol)
 println(rate.ask())
 ```
 
-#### 2. Get Many FX Rates
+#### 2. Fetch Many FX Rates
 
 ```scala
 val fetcher: RateFetcher = new TrueFxFetcher()
