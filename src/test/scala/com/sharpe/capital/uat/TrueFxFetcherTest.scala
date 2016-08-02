@@ -32,10 +32,10 @@ class TrueFxFetcherTest extends FeatureSpec with GivenWhenThen {
       var rate: FxRate = fetcher.getRateBySymbol(symbol)
 
       Then("the bid / ask rate should be greater than zero")
-      assert(rate.ask() > 0)
-      assert(rate.bid() > 0)
-      assert(rate.ask() >= rate.bid())
-      assert(rate.symbol().equals(symbol))
+      assert(rate.ask > 0)
+      assert(rate.bid > 0)
+      assert(rate.ask >= rate.bid)
+      assert(rate.symbol.equals(symbol))
 
     }
 
@@ -69,9 +69,9 @@ class TrueFxFetcherTest extends FeatureSpec with GivenWhenThen {
 
       Then("all bid / ask rates should be greater than zero")
       for (rate <- rates) {
-        assert(rate.ask() > 0)
-        assert(rate.bid() > 0)
-        assert(rate.ask() >= rate.bid())
+        assert(rate.ask > 0)
+        assert(rate.bid > 0)
+        assert(rate.ask >= rate.bid)
       }
 
     }
@@ -89,9 +89,9 @@ class TrueFxFetcherTest extends FeatureSpec with GivenWhenThen {
 
       Then("all bid / ask rates should be greater than zero")
       for (rate <- rates) {
-        assert(rate.ask() > 0)
-        assert(rate.bid() > 0)
-        assert(rate.ask() >= rate.bid())
+        assert(rate.ask > 0)
+        assert(rate.bid > 0)
+        assert(rate.ask >= rate.bid)
       }
 
     }

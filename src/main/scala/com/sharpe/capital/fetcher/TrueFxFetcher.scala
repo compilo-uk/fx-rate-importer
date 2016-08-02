@@ -13,6 +13,7 @@ import com.sharpe.capital.model.FxRate
 import scala.collection.mutable.MutableList
 import scala.collection.mutable.Buffer
 import scala.collection.mutable.ArrayBuffer
+import org.joda.time.DateTime
 
 /**
  * FX Rate Fetcher class. Abstracts out connectivity to True FX API and
@@ -34,11 +35,11 @@ class TrueFxFetcher() extends RateFetcher {
     val sections = trueFxRow.split(",")
 
     val symbol = sections(0)
-    val date = new Date(sections(1).toLong / 1000)
+    val date = new DateTime(sections(1).toLong / 1000)
     val bid = BigDecimal.exact(sections(2) + sections(3))
     val ask = BigDecimal.exact(sections(4) + sections(5))
 
-    return new FxRate(ask, bid, symbol, date)
+    return new FxRate(symbol, ask, bid, date)
 
   }
 
