@@ -9,8 +9,6 @@ import com.typesafe.config.ConfigFactory
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import java.util.concurrent.CountDownLatch
-import java.util.ArrayList
-import scala.collection.mutable.LinkedList
 import com.sharpe.capital.model.FxRate
 import scala.collection.mutable.MutableList
 import scala.collection.mutable.Buffer
@@ -24,10 +22,13 @@ class TrueFxFetcher() extends RateFetcher {
 
   private val conf: Config = ConfigFactory.load()
 
-  private val TrueFxBaseUrl: String = "https://webrates.truefx.com/rates/connect.html"
+  private val TrueFxBaseUrl: String = conf.getString("true.fx.base.url")
   private val TrueFxUsername: String = conf.getString("true.fx.username")
   private val TrueFxPassword: String = conf.getString("true.fx.password")
 
+  /**
+   * { @inheritdoc }
+   */
   override def buildFxRate(trueFxRow: String): FxRate = {
 
     val sections = trueFxRow.split(",")
@@ -41,6 +42,9 @@ class TrueFxFetcher() extends RateFetcher {
 
   }
 
+  /**
+   * { @inheritdoc }
+   */
   override def getRateBySymbol(symbol: String): FxRate = {
 
     val sessionId: String = Http(TrueFxBaseUrl).param("u", TrueFxUsername).param("p", TrueFxPassword).param("q", "eurates").asString.body.trim();
@@ -48,8 +52,6 @@ class TrueFxFetcher() extends RateFetcher {
     val ratesResponse: HttpResponse[String] = Http(TrueFxBaseUrl).param("id", sessionId).param("f", "csv").param("c", symbol).asString
 
     val ratesRow = ratesResponse.body.trim();
-
-    println(ratesRow)
 
     if (ratesRow != null && !ratesRow.isEmpty()) {
       return this.buildFxRate(ratesRow);
@@ -59,20 +61,15 @@ class TrueFxFetcher() extends RateFetcher {
 
   }
 
+  /**
+   * { @inheritdoc }
+   */
   override def getRatesBySymbols(symbols: Array[String]): Buffer[FxRate] = {
 
-    val latch = new CountDownLatch(symbols.size)
+    val latch: CountDownLatch = new CountDownLatch(symbols.size)
     val rates: ArrayBuffer[FxRate] = new ArrayBuffer[FxRate]()
 
-    for (symbol <- symbols) {
-
-      val task = Future[FxRate] {
-        getRateBySymbol(symbol)
-      }
-
-      task.onComplete { result => completeRate(result.get, rates, latch) }
-
-    }
+    symbols.foreach { symbol => this.completeSymbol(symbol, rates, latch) }
 
     latch.await()
 
@@ -81,9 +78,31 @@ class TrueFxFetcher() extends RateFetcher {
   }
 
   /**
-   * Appends the FX rate to the result list if not null, and decrements the count down latch
+   * Fetches the FX Rate object for the given symbol in a non-blocking way using a Future implementation
+   *
+   * @param symbol the currency pair symbol
+   * @param rates the final Buffer of FX rates
+   * @param latch the count down latch for the asynchronous processing
    */
-  private def completeRate(rate: FxRate, rates: ArrayBuffer[FxRate], latch: CountDownLatch) {
+  private def completeSymbol(symbol: String, rates: Buffer[FxRate], latch: CountDownLatch) {
+
+    val task = Future[FxRate] {
+      this.getRateBySymbol(symbol)
+    }
+
+    task.onComplete { result => completeRate(result.get, rates, latch) }
+
+  }
+
+  /**
+   * Appends the FX rate to the result list if not null, and decrements the count down latch.
+   * This is called from within the onComplete function of a Future object
+   *
+   * @param rate the FX rate to complete
+   * @param rates the final Buffer of FX rates
+   * @param latch the count down latch for the asynchronous processing
+   */
+  private def completeRate(rate: FxRate, rates: Buffer[FxRate], latch: CountDownLatch) {
 
     if (rate != null) {
       rates.append(rate)

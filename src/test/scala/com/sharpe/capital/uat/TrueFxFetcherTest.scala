@@ -10,6 +10,9 @@ import com.sharpe.capital.model.FxRate
 import com.sharpe.capital.fetcher.TrueFxFetcher
 import scala.collection.mutable.Buffer
 
+/**
+ * Acceptance tests for the TrueFxFetcher class
+ */
 class TrueFxFetcherTest extends FeatureSpec with GivenWhenThen {
 
   private val fetcher: RateFetcher = new TrueFxFetcher()
