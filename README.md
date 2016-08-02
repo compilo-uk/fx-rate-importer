@@ -16,12 +16,10 @@ The library is available in the following Nexus repository:
 Add this repository to your `pom.xml` file like so:
 
 ```xml
-<repositories>
-	<repository>
-		<id>sharpe-capital-releases</id>
-		<url>http://nexus.sharpecapital.co.uk:8081/content/repositories/releases</url>
-	</repository>
-</repositories>
+<repository>
+	<id>sharpe-capital-releases</id>
+	<url>http://nexus.sharpecapital.co.uk:8081/content/repositories/releases</url>
+</repository>
 ```
 
 Add this dependency to your `pom.xml` file like so:
