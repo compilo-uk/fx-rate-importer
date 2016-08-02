@@ -70,21 +70,26 @@ class TrueFxFetcher() extends RateFetcher {
         getRateBySymbol(symbol)
       }
 
-      task.onComplete { result =>
-        {
-          val rate = result.get
-          if (rate != null) {
-            rates.append(rate)
-          }
-          latch.countDown()
-        }
-      }
+      task.onComplete { result => completeRate(result.get, rates, latch) }
 
     }
 
     latch.await()
 
     return rates
+
+  }
+
+  /**
+   * Appends the FX rate to the result list if not null, and decrements the count down latch
+   */
+  private def completeRate(rate: FxRate, rates: ArrayBuffer[FxRate], latch: CountDownLatch) {
+
+    if (rate != null) {
+      rates.append(rate)
+    }
+
+    latch.countDown()
 
   }
 
