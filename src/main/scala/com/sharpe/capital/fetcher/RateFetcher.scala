@@ -13,8 +13,8 @@ trait RateFetcher {
   def getRateBySymbol(symbol: String): FxRate
 
   /**
-   * Returns a list of exchange rates for a list of given currency symbols
+   * Returns an array of exchange rates for an array of given currency symbols
    */
-  def getRatesBySymbols(symbol: List[String]): List[FxRate]
+  def getRatesBySymbols(symbol: Array[String]): Array[FxRate]
 
 }

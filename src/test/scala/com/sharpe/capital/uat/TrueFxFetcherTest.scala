@@ -27,12 +27,20 @@ class TrueFxFetcherTest extends FeatureSpec with GivenWhenThen {
       assert(rate.symbol().equals(symbol))
     }
     scenario("User requests FX rate with invalid ticker symbol") {
-      var symbol = "AUD/USD"
+      var symbol = "AUD/XXX"
       var rate: FxRate = fetcher.getRateBySymbol(symbol)
       assert(rate.ask() > 0)
       assert(rate.bid() > 0)
       assert(rate.ask() >= rate.bid())
       assert(rate.symbol().equals(symbol))
+    }
+  }
+
+  feature("Consumer requests multiple FX rates with multiple ticker symbols") {
+    scenario("User requests 3 valid ticker symbols") {
+      var symbols = Array[String]("AUD/USD", "GBP/USD", "EUR/USD")
+      var rates: Array[FxRate] = fetcher.getRatesBySymbols(symbols)
+      assert(rates.size == 3)
     }
   }
 

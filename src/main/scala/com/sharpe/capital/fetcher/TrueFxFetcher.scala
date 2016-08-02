@@ -6,6 +6,12 @@ import com.sharpe.capital.model.FxRate
 import java.util.Date
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
+import java.util.concurrent.CountDownLatch
+import java.util.ArrayList
+import scala.collection.mutable.LinkedList
+import com.sharpe.capital.model.FxRate
 
 /**
  * FX Rate Fetcher class. Abstracts out connectivity to True FX API and
@@ -38,12 +44,38 @@ class TrueFxFetcher() extends RateFetcher {
 
     val ratesResponse: HttpResponse[String] = Http(TrueFxBaseUrl).param("id", sessionId).param("f", "csv").param("c", symbol).asString
 
-    return this.buildFxRate(ratesResponse.body.trim());
+    val ratesRow = ratesResponse.body.trim();
+
+    println(ratesRow)
+
+    return this.buildFxRate(ratesRow);
 
   }
 
-  override def getRatesBySymbols(symbol: List[String]): List[FxRate] = {
-    return null
+  override def getRatesBySymbols(symbols: Array[String]): Array[FxRate] = {
+
+    val latch = new CountDownLatch(symbols.size)
+    val rates = new Array[FxRate](symbols.size)
+
+    for (i <- 0 to (symbols.length - 1)) {
+
+      val task = Future[FxRate] {
+        getRateBySymbol(symbols(i))
+      }
+
+      task.onComplete { result =>
+        {
+          rates(i) = result.get
+          latch.countDown()
+        }
+      }
+
+    }
+
+    latch.await()
+
+    return rates
+
   }
 
 }
