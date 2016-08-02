@@ -56,4 +56,16 @@
 			</plugin>
 		</plugins>
 	</build>
+	<distributionManagement>
+		<repository>
+			<id>nexus-site</id>
+			<url>http://nexus.sharpecapital.co.uk:8081/content/repositories/snapshots</url>
+		</repository>
+	</distributionManagement>
+	<repositories>
+		<repository>
+			<id>nexus-releases</id>
+			<url>http://nexus.sharpecapital.co.uk:8081/content/repositories/releases</url>
+		</repository>
+	</repositories>
 </project>

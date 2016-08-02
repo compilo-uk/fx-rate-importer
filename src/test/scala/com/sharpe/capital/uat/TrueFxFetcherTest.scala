@@ -3,11 +3,11 @@ package com.sharpe.capital.uat
 import org.scalatest.FeatureSpec
 import org.scalatest.GivenWhenThen
 
+import com.sharpe.capital.model.FxRate
 import com.sharpe.capital.fetcher.RateFetcher
+import com.sharpe.capital.fetcher.TrueFxFetcher
 import com.typesafe.config.ConfigFactory
 import com.typesafe.config.Config
-import com.sharpe.capital.model.FxRate
-import com.sharpe.capital.fetcher.TrueFxFetcher
 import scala.collection.mutable.Buffer
 
 /**
