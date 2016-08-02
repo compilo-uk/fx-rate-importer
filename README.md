@@ -10,19 +10,28 @@ The rates are retrieved from the [True FX API](http://www.truefx.com/), which of
 The library is available in the following Nexus repository:
 
 ```
-TBC
+[http://nexus.sharpecapital.co.uk:8081](http://nexus.sharpecapital.co.uk:8081/)
 ```
 
 Add this repository to your `pom.xml` file like so:
 
-```
-TBC
+```xml
+<repositories>
+	<repository>
+		<id>sharpe-capital-releases</id>
+		<url>http://nexus.sharpecapital.co.uk:8081/content/repositories/releases</url>
+	</repository>
+</repositories>
 ```
 
 Add this dependency to your `pom.xml` file like so:
 
-```
-TBC
+```xml
+<dependency>
+	<groupId>fx-rate-importer</groupId>
+	<artifactId>fx-rate-importer</artifactId>
+	<version>0.0.1</version>
+</dependency>
 ```
 
 ## Usage / Examples
