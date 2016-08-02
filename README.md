@@ -75,8 +75,8 @@ TBC
 
 ## Contributing
 
-#### Unit tests
-Acceptance tests are written in [ScalaTest](http://www.scalatest.org/). Please add acceptance tests for every new feature or bug fix. `mvn install` to run the test suite.  
+#### BDD Tests
+Acceptance tests are written in [ScalaTest](http://www.scalatest.org/). Please add acceptance tests for every new feature or bug fix. You can run the test suite by executing `mvn install`.
 
 #### Documentation
 Add documentation for every change. Feel free to send corrections or better docs! 
