@@ -30,7 +30,7 @@ Add this dependency to your `pom.xml` file like so:
 </dependency>
 ```
 
-_(Please check the GitHub repository releases section for the latest version)_
+_(Please check the GitHub repository releases section for the [latest version](https://github.com/sharpecapital/fx-rate-importer/releases))_
 
 ## Usage / Examples
 
