@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sharpe.capital</groupId>
 	<artifactId>fx-rate-importer</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<properties>
 		<scala.version>2.11</scala.version>
 		<java.version>1.8</java.version>
@@ -63,7 +63,7 @@
 		<url>https://github.com/sharpecapital/fx-rate-importer</url>
 		<connection>scm:git:git@github.com/sharpecapital/fx-rate-importer.git</connection>
 		<developerConnection>scm:git:git@github.com:sharpecapital/fx-rate-importer.git</developerConnection>
-		<tag>fx-rate-importer-0.0.4</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<distributionManagement>
 		<repository>
