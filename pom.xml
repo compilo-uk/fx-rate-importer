@@ -63,8 +63,12 @@
   </scm>
 	<distributionManagement>
 		<repository>
-			<id>nexus-site</id>
-			<url>http://nexus.sharpecapital.co.uk:8081/content/repositories</url>
+			<id>nexus-sharpe-capital-snapshots</id>
+			<url>http://nexus.sharpecapital.co.uk:8081/content/repositories/releases/</url>
 		</repository>
+		<snapshotRepository>
+			<id>nexus-sharpe-capital-snapshots</id>
+			<url>http://nexus.sharpecapital.co.uk:8081/content/repositories/snapshots/</url>
+		</snapshotRepository>
 	</distributionManagement>
 </project>
