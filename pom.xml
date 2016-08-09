@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.sharpe.capital</groupId>
+	<groupId>fx-rate-importer</groupId>
 	<artifactId>fx-rate-importer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
@@ -19,11 +19,6 @@
 			<groupId>org.scalaj</groupId>
 			<artifactId>scalaj-http_${scala.version}</artifactId>
 			<version>2.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.websudos</groupId>
-			<artifactId>phantom-dsl_${scala.version}</artifactId>
-			<version>1.22.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.typesafe</groupId>
@@ -63,7 +58,7 @@
 	</build>
 	<distributionManagement>
 		<repository>
-			<id>nexus</id>
+			<id>nexus-site</id>
 			<url>http://nexus.sharpecapital.co.uk:8081/content/repositories/snapshots</url>
 		</repository>
 	</distributionManagement>
