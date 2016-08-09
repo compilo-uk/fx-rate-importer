@@ -26,9 +26,11 @@ Add this dependency to your `pom.xml` file like so:
 <dependency>
 	<groupId>com.sharpe.capital</groupId>
 	<artifactId>fx-rate-importer</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.4</version>
 </dependency>
 ```
+
+_(Please check the GitHub repository releases section for the latest version)_
 
 ## Usage / Examples
 
