@@ -1,5 +1,5 @@
 # FX Rate Importer
-A low-latent & concurrent importer for FX rates, which fetches real-time quotes and persists them in a Cassandra data store.
+A low-latent & concurrent importer for FX rates, which provides an abstraction for fetching real-time quotes over REST.
 
 The importer is implemented using Scala's Fututre class to important the rates as quickly as possible, with minimum blocking operations.
 
@@ -34,8 +34,6 @@ _(Please check the GitHub repository releases section for the [latest version](h
 
 ## Usage / Examples
 
-This library can be used to simply retrieve FX rates from the [True FX API](http://www.truefx.com/), or to persist them to an underlying Cassandra data store.
-
 #### 1. Fetch Single FX Rate
 
 ```scala
@@ -66,18 +64,6 @@ val fetcher: RateFetcher = new TrueFxFetcher()
 var symbols = Array[String]("AUD/USD", "GBP/USD", "EUR/USD")
 
 var rates: Buffer[FxRate] = fetcher.getRatesBySymbols(symbols)
-```
-
-#### 3. Persist Single FX Rate
-
-```
-TBC
-```
-
-#### 4. Persist Many FX Rates
-
-```
-TBC
 ```
 
 ## Contributing
