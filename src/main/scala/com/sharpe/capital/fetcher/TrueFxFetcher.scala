@@ -31,12 +31,19 @@ class TrueFxFetcher() extends RateFetcher {
    */
   override def buildFxRate(trueFxRow: String): FxRate = {
 
+    println(trueFxRow)
+
     val sections = trueFxRow.split(",")
 
     val symbol = sections(0)
-    val date = new Date(sections(1).toLong / 1000)
+    val date = new Date(sections(1).toLong)
     val bid = BigDecimal.exact(sections(2) + sections(3))
     val ask = BigDecimal.exact(sections(4) + sections(5))
+
+    println(ask);
+    println(bid);
+    println(symbol);
+    println(date);
 
     return new FxRate(ask, bid, symbol, date)
 
