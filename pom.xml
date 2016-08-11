@@ -3,6 +3,7 @@
 	<groupId>com.sharpe.capital</groupId>
 	<artifactId>fx-rate-importer</artifactId>
 	<version>0.0.6-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<properties>
 		<scala.version>2.11</scala.version>
 		<java.version>1.8</java.version>
@@ -26,6 +27,7 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<sourceDirectory>src/main/scala</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
